@@ -1,0 +1,12 @@
+[package]
+name = "urii"
+version = "0.1.0"
+authors = ["Sebastian Woetzel <wose@zuendmasse.de>"]
+
+[dependencies]
+chrono = "0.2"
+irc = "0.11.0"
+rand = "0.3"
+regex = "0.2"
+rustc-serialize = "0.3"
+timer = "0.1.6"
