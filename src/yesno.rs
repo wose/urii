@@ -1,4 +1,4 @@
-use bot::{MsgHandler};
+use bot::MsgHandler;
 use irc::client::prelude::*;
 use rand::{ThreadRng, Rng, thread_rng, sample};
 use rustc_serialize::json;
@@ -8,7 +8,7 @@ use std::io::prelude::*;
 pub struct YesNoPlugin {
     resp_yes: Vec<json::Json>,
     resp_no: Vec<json::Json>,
-    rng: ThreadRng
+    rng: ThreadRng,
 }
 
 impl YesNoPlugin {
@@ -24,14 +24,13 @@ impl YesNoPlugin {
         YesNoPlugin {
             resp_yes: resp_yes.to_vec(),
             resp_no: resp_no.to_vec(),
-            rng: thread_rng()
+            rng: thread_rng(),
         }
     }
 }
 
 impl MsgHandler for YesNoPlugin {
-    fn on_priv_msg(&mut self, irc: IrcServer, message: &Message, target: &str, msg: &str)
-    {
+    fn on_priv_msg(&mut self, irc: IrcServer, message: &Message, target: &str, msg: &str) {
         if msg.contains("!urii") {
             let user = message.source_nickname().unwrap_or("");
 
@@ -39,20 +38,21 @@ impl MsgHandler for YesNoPlugin {
                 let msg = msg.trim_left_matches("!urii");
                 let choices = msg.split("oder").collect::<Vec<&str>>();
                 let sample = sample(&mut self.rng, choices, 1);
-                irc.send_privmsg(target,
-                                 format!("{}: {}", user, sample[0].trim())
-                                 .as_str()).unwrap();
+                irc.send_privmsg(target, format!("{}: {}", user, sample[0].trim()).as_str())
+                    .unwrap();
             } else {
                 if self.rng.gen() {
                     let sample = sample(&mut self.rng, &self.resp_yes, 1);
                     irc.send_privmsg(target,
-                                     format!("{}: {}", user, sample[0].as_string().unwrap())
-                                     .as_str()).unwrap();
+                                      format!("{}: {}", user, sample[0].as_string().unwrap())
+                                          .as_str())
+                        .unwrap();
                 } else {
                     let sample = sample(&mut self.rng, &self.resp_no, 1);
                     irc.send_privmsg(target,
-                                     format!("{}: {}", user, sample[0].as_string().unwrap())
-                                     .as_str()).unwrap();
+                                      format!("{}: {}", user, sample[0].as_string().unwrap())
+                                          .as_str())
+                        .unwrap();
                 }
             }
         }

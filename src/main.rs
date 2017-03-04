@@ -4,7 +4,6 @@ extern crate rand;
 extern crate regex;
 extern crate rustc_serialize;
 
-//mod store;
 mod bot;
 mod timer;
 mod yesno;
