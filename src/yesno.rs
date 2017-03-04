@@ -5,10 +5,6 @@ use rustc_serialize::json;
 use std::fs::File;
 use std::io::prelude::*;
 
-pub fn new() -> YesNoPlugin {
-    YesNoPlugin::new()
-}
-
 pub struct YesNoPlugin {
     resp_yes: Vec<json::Json>,
     resp_no: Vec<json::Json>,

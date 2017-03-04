@@ -5,10 +5,6 @@ use bot::{MsgHandler};
 use irc::client::prelude::*;
 use regex::Regex;
 
-pub fn new() -> TimerPlugin {
-   TimerPlugin::new()
-}
-
 pub struct TimerPlugin {
     timer: timer::Timer,
     re: Regex

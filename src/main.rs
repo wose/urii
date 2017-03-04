@@ -13,7 +13,7 @@ use bot::Bot;
 
 fn main() {
     Bot::new()
-        .with(yesno::new())
-        .with(timer::new())
+        .with(yesno::YesNoPlugin::new())
+        .with(timer::TimerPlugin::new())
         .run("config.json");
 }
