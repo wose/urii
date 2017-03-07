@@ -5,6 +5,7 @@ extern crate regex;
 extern crate rustc_serialize;
 
 mod bot;
+mod summon;
 mod timer;
 mod yesno;
 
@@ -14,5 +15,6 @@ fn main() {
     Bot::new()
         .with(yesno::YesNoPlugin::new())
         .with(timer::TimerPlugin::new())
+        .with(summon::SummonPlugin::new())
         .run("config.json");
 }
