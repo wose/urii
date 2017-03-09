@@ -12,6 +12,7 @@ use time;
 pub struct SeenData {
     pub time: DateTime<Local>,
     pub text: String,
+    pub channel: String,
 }
 
 pub struct SeenPlugin {
@@ -31,13 +32,17 @@ impl SeenPlugin {
 impl MsgHandler for SeenPlugin {
     fn on_priv_msg(&mut self, irc: IrcServer, message: &Message, target: &str, msg: &str) {
         if let Some(user) = message.source_nickname() {
-            self.store
-                .set(module_path!(),
-                     user,
-                     SeenData {
-                         time: Local::now(),
-                         text: msg.trim().into(),
-                     }).unwrap();
+            if target.starts_with('#') {
+                self.store
+                    .set(module_path!(),
+                         user,
+                         SeenData {
+                             time: Local::now(),
+                             text: msg.trim().into(),
+                             channel: target.into(),
+                         }).unwrap();
+            }
+
             if let Some(cap) = self.re.captures(&msg) {
                 match self.store.get::<SeenData>(module_path!(), &cap[1].trim()) {
                     Ok(data) => {
@@ -45,8 +50,9 @@ impl MsgHandler for SeenPlugin {
                         let duration = now.signed_duration_since(data.time);
 
                         irc.send_privmsg(&target,
-                                          format!("{} was last seen {} ago saying \"{}\"",
+                                          format!("{} was last seen in {} {} ago saying \"{}\"",
                                                   &cap[1].trim(),
+                                                  data.channel,
                                                   format_duration(duration),
                                                   data.text)
                                               .as_str())
