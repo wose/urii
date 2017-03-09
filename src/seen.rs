@@ -44,24 +44,29 @@ impl MsgHandler for SeenPlugin {
             }
 
             if let Some(cap) = self.re.captures(&msg) {
-                match self.store.get::<SeenData>(module_path!(), &cap[1].trim()) {
-                    Ok(data) => {
-                        let now = Local::now();
-                        let duration = now.signed_duration_since(data.time);
+                if cap[1].trim() == "urii" {
+                    irc.send_privmsg(&target, "You can't see the forest for the trees, can you?")
+                        .unwrap();
+                } else {
+                    match self.store.get::<SeenData>(module_path!(), &cap[1].trim()) {
+                        Ok(data) => {
+                            let now = Local::now();
+                            let duration = now.signed_duration_since(data.time);
 
-                        irc.send_privmsg(&target,
-                                          format!("{} was last seen in {} {} ago saying \"{}\"",
-                                                  &cap[1].trim(),
-                                                  data.channel,
-                                                  format_duration(duration),
-                                                  data.text)
-                                              .as_str())
-                            .unwrap();
-                    },
-                    Err(_) => {
-                        irc.send_privmsg(&target,
-                                          format!("Sorry. I haven't seen {}", &cap[1]).as_str())
-                            .unwrap();
+                            irc.send_privmsg(&target,
+                                             format!("{} was last seen in {} {} ago saying \"{}\"",
+                                                     &cap[1].trim(),
+                                                     data.channel,
+                                                     format_duration(duration),
+                                                     data.text)
+                                             .as_str())
+                                .unwrap();
+                        },
+                        Err(_) => {
+                            irc.send_privmsg(&target,
+                                             format!("Sorry. I haven't seen {}", &cap[1]).as_str())
+                                .unwrap();
+                        }
                     }
                 }
             }
