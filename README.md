@@ -28,5 +28,5 @@
 ### [SummonPlugin](https://github.com/wose/urii/blob/master/src/summon.rs)
 - `summon foo`
   - the bot will take part in an ancient rite to summon whatever you requested
-  - even if you have 8 bots, do not perform the Rite of AshkEnte, you know who DOESN'T LIKE IT.
+  - even if you have 8 bots, do not perform the *Rite of AshkEnte*, you know who DOESN'T LIKE IT.
 
