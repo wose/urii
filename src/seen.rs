@@ -36,17 +36,17 @@ impl MsgHandler for SeenPlugin {
                      user,
                      SeenData {
                          time: Local::now(),
-                         text: msg.into(),
+                         text: msg.trim().into(),
                      }).unwrap();
             if let Some(cap) = self.re.captures(&msg) {
-                match self.store.get::<SeenData>(module_path!(), &cap[1]) {
+                match self.store.get::<SeenData>(module_path!(), &cap[1].trim()) {
                     Ok(data) => {
                         let now = Local::now();
                         let duration = now.signed_duration_since(data.time);
 
                         irc.send_privmsg(&target,
                                           format!("{} was last seen {} ago saying \"{}\"",
-                                                  &cap[1],
+                                                  &cap[1].trim(),
                                                   format_duration(duration),
                                                   data.text)
                                               .as_str())
