@@ -38,7 +38,7 @@ impl MsgHandler for SeenPlugin {
                          user,
                          SeenData {
                              time: Local::now(),
-                             text: msg.trim().into(),
+                             text: format!("saying \"{}\"", msg.trim()),
                              channel: target.into(),
                          }).unwrap();
             }
@@ -54,7 +54,7 @@ impl MsgHandler for SeenPlugin {
                             let duration = now.signed_duration_since(data.time);
 
                             irc.send_privmsg(&target,
-                                             format!("{} was last seen in {} {} ago saying \"{}\"",
+                                             format!("{} was last seen in {} {} ago {}",
                                                      &cap[1].trim(),
                                                      data.channel,
                                                      format_duration(duration),
@@ -70,6 +70,20 @@ impl MsgHandler for SeenPlugin {
                     }
                 }
             }
+        }
+    }
+
+    fn on_join(&mut self, _irc: IrcServer, message: &Message, channel: &str) {
+        if let Some(user) = message.source_nickname() {
+            self.store
+                .set(module_path!(),
+                     user,
+                     SeenData {
+                         time: Local::now(),
+                         text: "joining the channel".into(),
+                         channel: channel.into(),
+                     }).unwrap();
+
         }
     }
 }
