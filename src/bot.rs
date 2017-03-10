@@ -7,7 +7,8 @@ use irc::client::prelude::*;
 #[allow(unused_variables)]
 pub trait MsgHandler {
     fn on_priv_msg(&mut self, irc: IrcServer, message: &Message, target: &str, msg: &str) {}
-    fn on_join(&mut self, irc:IrcServer, message: &Message, channel: &str) {}
+    fn on_join(&mut self, irc: IrcServer, message: &Message, channel: &str) {}
+    fn on_part(&mut self, irc: IrcServer, message: &Message, channel: &str) {}
 }
 
 pub struct Bot<'a> {
@@ -46,6 +47,9 @@ impl<'a> Bot<'a> {
                             },
                             Command::JOIN(ref channel, ..) => {
                                 plugin.on_join(server.clone(), message, channel);
+                            },
+                            Command::PART(ref channel, ..) => {
+                                plugin.on_part(server.clone(), message, channel);
                             },
                             _ => {}
                         }
