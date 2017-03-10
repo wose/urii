@@ -21,7 +21,7 @@
 ### [SeenPlugin](https://github.com/wose/urii/blob/master/src/seen.rs)
 - `seen foo`
   - tells you how long ago *foo* was last seen
-  - at the moment only channel or private messages are logged, joining is not tracked
+  - tracks messages and join/part events
 
 ### [SummonPlugin](https://github.com/wose/urii/blob/master/src/summon.rs)
 - `summon foo`
