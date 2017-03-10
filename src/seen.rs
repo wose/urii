@@ -86,6 +86,20 @@ impl MsgHandler for SeenPlugin {
 
         }
     }
+
+    fn on_part(&mut self, _irc: IrcServer, message: &Message, channel: &str) {
+        if let Some(user) = message.source_nickname() {
+            self.store
+                .set(module_path!(),
+                     user,
+                     SeenData {
+                         time: Local::now(),
+                         text: "leaving the channel".into(),
+                         channel: channel.into(),
+                     }).unwrap();
+
+        }
+    }
 }
 
 fn format_duration(duration: time::Duration) -> String {
