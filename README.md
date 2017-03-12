@@ -30,8 +30,10 @@
 
 ### [TimerPlugin](https://github.com/wose/urii/blob/master/src/timer.rs)
 - `foo in 5 minutes`
-  - sets alarm with topic *foo* in 5 minutes (always minutes, foo in 5 bananas would work as well)
-
+  - sets timer with topic *foo* in 5 minutes (always minutes, foo in 5 bananas would work as well)
+- `eta foo`
+  - returns the remaining minutes of the timer with topic *foo*
+  
 ### [YesNoPlugin](https://github.com/wose/urii/blob/master/src/yesno.rs)
 - `!urii foobar?`
   - uses `resp_yes` and `resp_no` in `config.json` to generate the reply
