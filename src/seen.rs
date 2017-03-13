@@ -83,7 +83,6 @@ impl MsgHandler for SeenPlugin {
                          text: "joining the channel".into(),
                          channel: channel.into(),
                      }).unwrap();
-
         }
     }
 

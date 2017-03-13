@@ -11,6 +11,7 @@ extern crate serde_json;
 extern crate time;
 
 mod bot;
+mod dice;
 mod seen;
 mod store;
 mod summon;
@@ -25,6 +26,7 @@ fn main() {
     let store = Rc::new(store::Store::new("db.sqlite"));
 
     Bot::new()
+        .with(dice::DicePlugin::new())
         .with(yesno::YesNoPlugin::new())
         .with(timer::TimerPlugin::new())
         .with(summon::SummonPlugin::new())
