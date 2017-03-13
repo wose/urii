@@ -44,6 +44,13 @@ impl MsgHandler for KarmaPlugin {
         let user = message.source_nickname().unwrap_or("".into());
 
         if let Some(cap) = self.mod_re.captures(&msg) {
+            if user.to_lowercase() == cap[1].to_lowercase() {
+                irc.send_privmsg(&target,
+                                  format!("{}: come on... no cheating", user).as_str())
+                    .unwrap();
+                return;
+            }
+
             let mut thing =
                 self.store.get::<Thing>(module_path!(), &cap[1]).unwrap_or(Thing {
                                                                                name: cap[1].into(),
