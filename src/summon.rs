@@ -11,9 +11,7 @@ pub struct SummonPlugin {
 
 impl SummonPlugin {
     pub fn new() -> Self {
-        SummonPlugin {
-            re: Regex::new(r"^(?:summon\s+)([[:alpha:]]*)\s*$").unwrap(),
-        }
+        SummonPlugin { re: Regex::new(r"^(?:summon\s+)([[:alpha:]]*)\s*$").unwrap() }
     }
 }
 

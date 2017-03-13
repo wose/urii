@@ -7,7 +7,7 @@ use rand::distributions::{IndependentSample, Range};
 
 pub struct DicePlugin {
     re: Regex,
-    rng: rand::ThreadRng,//rand::thread_rng();
+    rng: rand::ThreadRng,
 }
 
 impl DicePlugin {
