@@ -18,6 +18,14 @@
   - contains data the bot uses to reply to commands.
 
 ## Core Plugins
+### [KarmaPlugin](https://github.com/wose/urii/blob/master/src/karma.rs)
+- `foo++ # reason` or `foo-- # reason`
+  - modifies the karma of *foo* with an optional reason
+- `karma foo`
+  - shows the overall karma of *foo*
+- `explain foo`
+  - shows 3 reasons for positive and negative karma of *foo*
+
 ### [SeenPlugin](https://github.com/wose/urii/blob/master/src/seen.rs)
 - `seen foo`
   - tells you how long ago *foo* was last seen
