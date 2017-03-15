@@ -12,6 +12,7 @@ extern crate time;
 
 mod bot;
 mod dice;
+mod info;
 mod karma;
 mod seen;
 mod store;
@@ -28,6 +29,7 @@ fn main() {
 
     Bot::new()
         .with(dice::DicePlugin::new())
+        .with(info::InfoPlugin::new(store.clone()))
         .with(karma::KarmaPlugin::new(store.clone()))
         .with(yesno::YesNoPlugin::new())
         .with(timer::TimerPlugin::new())
