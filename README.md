@@ -18,6 +18,15 @@
   - contains data the bot uses to reply to commands.
 
 ## Core Plugins
+### [InfoPlugin](https://github.com/wose/urii/blob/master/src/info.rs)
+- `foo is bar`
+  - will create a new factoid for *foo*
+- `foo?`
+  - shows the factoid for *foo*
+- Tigger words
+  - is/are (en)
+  - ist/sind (de)
+
 ### [KarmaPlugin](https://github.com/wose/urii/blob/master/src/karma.rs)
 - `foo++ # reason` or `foo-- # reason`
   - modifies the karma of *foo* with an optional reason
