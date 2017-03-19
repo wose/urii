@@ -18,6 +18,11 @@
   - contains data the bot uses to reply to commands.
 
 ## Core Plugins
+### [ExcusePlugin](https://github.com/wose/urii/blob/master/src/excuse.rs)
+- fortunes and fortunes-bofh-excuses required
+- `give foo an excuse`
+  - generates an excuse for *foo*
+
 ### [InfoPlugin](https://github.com/wose/urii/blob/master/src/info.rs)
 - `foo is bar`
   - will create a new factoid for *foo*
