@@ -1,7 +1,9 @@
 extern crate chrono;
+extern crate hyper;
 extern crate irc;
 extern crate rand;
 extern crate regex;
+extern crate reqwest;
 extern crate rustc_serialize;
 extern crate rusqlite;
 extern crate serde;
@@ -19,6 +21,7 @@ mod seen;
 mod store;
 mod summon;
 mod timer;
+mod urlinfo;
 mod yesno;
 
 use bot::Bot;
@@ -37,5 +40,6 @@ fn main() {
         .with(timer::TimerPlugin::new())
         .with(summon::SummonPlugin::new())
         .with(seen::SeenPlugin::new(store.clone()))
+        .with(urlinfo::UrlInfoPlugin::new())
         .run("config.json");
 }

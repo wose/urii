@@ -5,9 +5,11 @@ authors = ["Sebastian Woetzel <wose@zuendmasse.de>"]
 
 [dependencies]
 chrono = { version = "0.3", features = ["serde", "rustc-serialize"] }
-irc = "0.11.0"
+hyper = "0.10"
+irc = { version = "0.11.0", default-features = false, features = ["ctcp", "encode"] }
 rand = "0.3"
 regex = "0.2"
+reqwest = "0.4.0"
 rusqlite = "0.10.1"
 rustc-serialize = "0.3"
 serde = "0.9.11"
