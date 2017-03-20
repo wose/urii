@@ -32,13 +32,14 @@ impl MsgHandler for UrlInfoPlugin {
             };
 
             let client = reqwest::Client::new().unwrap();
-            let resp = client.head(&url).send().unwrap();
+            let resp = match client.head(&url).send() {
+                Ok(resp) => resp,
+                Err(_) => return
+            };
 
             if !resp.status().is_success() {
                 return
             }
-
-            println!("Status: {}", resp.status());
 
             if let Some(content_type) = resp.headers().get::<reqwest::header::ContentType>() {
                 let mut buf = String::new();
