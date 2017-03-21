@@ -2,6 +2,7 @@ use bot::MsgHandler;
 use hyper::header::{UserAgent, ContentType};
 use hyper::mime::{Mime, TopLevel, SubLevel};
 use irc::client::prelude::*;
+use marksman_escape::Unescape;
 use regex::Regex;
 use reqwest;
 use std::io::Read;
@@ -56,8 +57,7 @@ impl MsgHandler for UrlInfoPlugin {
                         };
 
                         if let Some(cap) = self.title_re.captures(&buf) {
-                            println!("{}", &cap[1]);
-                            format!("{}", &cap[1]).into()
+                            String::from_utf8(Unescape::new(cap[1].bytes()).collect()).unwrap_or("".into())
                         } else {
                             "".into()
                         }
