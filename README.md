@@ -55,7 +55,14 @@
   - sets timer with topic *foo* in 5 minutes (always minutes, foo in 5 bananas would work as well)
 - `eta foo`
   - returns the remaining minutes of the timer with topic *foo*
-  
+
+### [UrlInfoPlugin](https://github.com/wose/urii/blob/master/src/urlinfo.rs)
+- if an http(s) url is received the bot will fetch http headers to check content type
+  - `text/html`
+    - fetch the body and return show the content of the title tag if present
+  - other
+    - show the content type of the linked file
+
 ### [YesNoPlugin](https://github.com/wose/urii/blob/master/src/yesno.rs)
 - `!urii foobar?`
   - uses `resp_yes` and `resp_no` in `config.json` to generate the reply
